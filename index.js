@@ -80,7 +80,7 @@ async function run() {
         app.get('/reviews/:id', async (req, res) => {
             const id = req.params.id;
             const query = { serviceId: id};
-            const service = await reviewCollection.findOne(query);
+            const service = await reviewCollection.find(query).toArray();
             res.send(service);
         });
 
@@ -104,6 +104,8 @@ async function run() {
             const review = await cursor.toArray();
             res.send(review);
         });
+
+
 
         app.post('/reviews', async (req, res) => {
             const review = req.body;
