@@ -105,13 +105,13 @@ async function run() {
             res.send(review);
         });
 
-        app.post('/reviews',verifyJWT, async (req, res) => {
+        app.post('/reviews', async (req, res) => {
             const review = req.body;
             const result = await reviewCollection.insertOne(review);
             res.send(result);
         });
 
-        app.patch('/reviews/:id',verifyJWT, async (req, res) => {
+        app.patch('/reviews/:id', async (req, res) => {
             const id = req.params.id;
             const status = req.body.text
             const query = { _id: ObjectId(id) }
@@ -124,7 +124,7 @@ async function run() {
             res.send(result);
         })
 
-        app.delete('/reviews/:id',verifyJWT, async (req, res) => {
+        app.delete('/reviews/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await reviewCollection.deleteOne(query);
